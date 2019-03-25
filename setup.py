@@ -21,8 +21,11 @@ setuptools.setup(
     install_requires=[
         "requests",
     ],
-    test_suite="tests",
-    tests_require=[
-
+    setup_requires=[
+        "pytest-runner"
     ],
+    tests_require=[
+        "pytest",
+        "pytest-cov"
+    ]
 )
