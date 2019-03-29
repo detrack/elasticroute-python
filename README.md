@@ -10,4 +10,4 @@ You have a fleet of just 10 vehicles to serve 500 spots in the city. Some vehicl
 
 You don't need to. Just throw us a list of stops, vehicles and depots and we will do the heavy lifting for you. *Routing as a Service!*
 
-**PRE-RELEASE:**  Preview only, full service launches 27th March 2019
+**BETA RELASE:**  ElasticRoute is completely free-to-use until 30th April 2020!
