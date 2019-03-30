@@ -1,18 +1,15 @@
 dist: xenial
 language: python
 python:
-  - "3.6"
-  - "3.7"
-# command to install dependencies
+- '3.6'
+- '3.7'
 install:
-  - pip install coveralls
-  - python setup.py develop
-# command to run tests
+- pip install coveralls
+- python setup.py develop
 script:
-  - python setup.py test --addopts '--cov=elasticroute'
-  
+- python setup.py test --addopts '--cov=elasticroute'
 after_success:
-  - coveralls
+- coveralls
 notifications:
   slack:
-    secure: vEKmzrD0Lf8emnT3tku/Q0+ccg2R9mU+58z0wObAX/MTslQDzOTxA0Jt1H0om6lLj4H8MOFdbpHdkSKyDaP7c0woPk0n0kFpa+ZVepZnyudY6+Ceq9EMMLB/ml08UBnxqdct42QccTcnbqXn0GqF97OTUyrPGZeME0CpjKt7+BC/+ospt84BLDTZTEXW7QzTHWqeWPc6Ib6O9vTJFvo8L91Es6A3TjQ2DEDrHmXc85CCr09AMa9KfhqiEJ/MtpFBc7laShH4DGtBsJv0/XPre/a3FK6VEDaW6wDlhkKGd6TA/oc8pFGX7FT9T4cbcYvmvaxzyLd2b5JrkfeRYhzyZlD0EZQ5o9IekPEc2lI+bZc5CZne6irqgl7eiEvZ+6ZrKlKVwg/+UOghgwvgKuWLrGtkdSt50irtNyPUJekkGsT9oCo1TCFFay/FNeXuY1V8bvQqWjBaO/36gQy+rm9+M3nS6QPehBP3g5w8C61d/BA20RAc9Zml28YaQ1fxoFTAQpREsKKG2iWxTHe6FXK9JGYfy0N6J+bvRJUuLjipX0zN1aMtJViqGyTXil0e9n9P3/YBH6hami4Uf0I/HMwtRvfzKVGadVzMKrIL4ktbi8ND1G8ku3AdMzpvUI4WVuoCoT7k3NQMFjXu0jGlEQ8cmMINVFlbqO9LcQgv75dbNyk=
+    secure: k1pdQZB5/WUdy+eLSJ/0vP5tVcKScHPJcRe4bwyUsANjoGNeWOrPW78pE/IXBMiCghMlsoBBkkp//q0r9t9liGuI5qiBSmSECwZFiEbcaQic/phsBEWxs8j6whDe5kqNoBeZSnimRWNpJjEsLxY28pxIcU5WJitYlkdh6Jv/AQIMksDsvOWNbPvNX7zvKWsVspgfSeJ8nsvQV9pW91a/wgaSnYKmwyTh2R48dd2cpo3DCwQDXvJ6WrsLts7W2WbuPqGyIaZZ2TUbzz17cReF7XFBj3hRlZD6mbhpK36ri+5ZftYmMU10ppgXUypFf40gCRxb9qIbOXAHeFOMudlUQtwWHLBjfi8x9GVZGbpcPMg4tg2u1JLRo9xINJLrVEAK1S3fjaZL72m+PhvHPNP9lwGKIlZzTCW0OEyOzoaRx8xebL/4odFz4yz7lii2H1wSBZVHdGDhkQAlBKxWEL81NH6wZAXdiurSYJzAmmD+qDpvvIJqZ2o1Efi7+TnR5J5ONbInlKRHn9TXoSgQRkS9kXUewDODg9hiTjnMgPPJa/Ku0F7Ld9spaj/2fNO/QSWgWEmq2VuprJ6Wa/zkilOPpCRykjpR9IgbtfP1U1XKe8LAjcpOYj7HvwewkHO9Diu0Xnx7+/rYSqM7IbIxrzuqqbGm3/+B94Z8OaMZUb/+qj0=
