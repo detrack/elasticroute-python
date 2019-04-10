@@ -7,6 +7,8 @@ install:
 - pip install coveralls
 - python setup.py develop
 script:
+- pip install -r requirements.txt
+- pip install -r requirements_dev.txt
 - python setup.py test --addopts '--cov=elasticroute'
 after_success:
 - coveralls
