@@ -18,6 +18,8 @@ class PlanValidationTest(unittest.TestCase):
                 },
                 "verify": False
             }
+        else:
+            cls.options = {}
 
     def testWillThrowExceptionWhenNoIdIsSet(self):
         plan = Plan()
