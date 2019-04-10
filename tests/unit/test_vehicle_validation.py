@@ -22,21 +22,6 @@ class VehicleValidationTest(unittest.TestCase):
         vehicle["address"] = random.sample(testAddresses, 1)[0]
         return vehicle
 
-    def testMustHaveAtLeastTwoVehicles(self):
-        __METHOD__ = inspect.stack()[0][3]
-        vehicles = [self.createVehicle(__METHOD__ + '0')]
-        try:
-            self.assertTrue(Vehicle.validateVehicles(vehicles))
-            self.fail('No exception was thrown')
-        except BadFieldError as ex:
-            self.assertRegex(str(ex), r'You must have at least two vehicles.*')
-
-        vehicles = [self.createVehicle(__METHOD__ + '1'),
-                 self.createVehicle(__METHOD__ + '2'),
-                 ]
-        self.assertTrue(Vehicle.validateVehicles(vehicles))
-        pass
-
     def testNamesMustBeDistinct(self):
         __METHOD__ = inspect.stack()[0][3]
         vehicles = [self.createVehicle(__METHOD__) for i in range(2)]

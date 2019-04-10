@@ -22,21 +22,6 @@ class DepotValidationTest(unittest.TestCase):
         depot["address"] = random.sample(testAddresses, 1)[0]
         return depot
 
-    def testMustHaveAtLeastTwoDepots(self):
-        __METHOD__ = inspect.stack()[0][3]
-        depots = [self.createDepot(__METHOD__ + '0')]
-        try:
-            self.assertTrue(Depot.validateDepots(depots))
-            self.fail('No exception was thrown')
-        except BadFieldError as ex:
-            self.assertRegex(str(ex), r'You must have at least two depots.*')
-
-        depots = [self.createDepot(__METHOD__ + '1'),
-                 self.createDepot(__METHOD__ + '2'),
-                 ]
-        self.assertTrue(Depot.validateDepots(depots))
-        pass
-
     def testNamesMustBeDistinct(self):
         __METHOD__ = inspect.stack()[0][3]
         depots = [self.createDepot(__METHOD__) for i in range(2)]
