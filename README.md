@@ -31,7 +31,7 @@ er.defaults.API_KEY = "my_super_secret_key"
 Create a new `Plan` object and givt it a name/id:
 
 ```python
-plan = Plan()
+plan = er.Plan()
 plan.id = "my_first_plan"
 ```
 
@@ -70,10 +70,10 @@ Give us an array of depots (warehouses):
 
 ```python
 plan.depots = [
-    [
+    {
         "name": "Main Warehouse",
         "address":  "61 Kaki Bukit Ave 1 #04-34, Shun Li Ind Park Singapore 417943",
-    ],
+    },
 ]
 ```
 
@@ -149,12 +149,12 @@ plan.vehicles = [
 ]
 plan.depots = [
     {
-        "name" => "Main Warehouse",
-        "address" => "Somewhere"
+        "name": "Main Warehouse",
+        "address": "Somewhere"
     },
     {
-        "name" => "Auxillary Warehouse",
-        "address" => "Somewhere else"
+        "name": "Auxillary Warehouse",
+        "address": "Somewhere else"
     }
 ]
 # solve and get results...
@@ -178,7 +178,6 @@ while solution.status != "planned":
     solution.refresh()
     time.sleep(2)
     # or do some threading or promise
-}
 ```
 Setting the `connection_type` to `"poll"` will cause the server to return you a response immediately after parsing the request data. You can monitor the status with the `status` and `progress` properties while fetching updates with the `refresh()` method.
 
