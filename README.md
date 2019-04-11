@@ -128,6 +128,7 @@ Not specifying the `from` and `till` keys of either class would result it being 
 
 A "home depot" can be set for both Stops and Vehicles. A depot for stops indicate where a vehicle must pick up a stop's goods before arriving, and a depot for vehicles indicate the start and end point of a Vehicle's journey (this implicitly assigns the possible jobs a Vehicle can take).
 By default, for every stop and vehicle, if the depot field is not specified we will assume it to be the first depot.
+
 ```python
 common_stop = er.Stop()
 common_stop["name"] = "Normal Delivery 1"
@@ -159,14 +160,18 @@ plan.depots = [
 ]
 # solve and get results...
 ```
+
 **IMPORTANT:** The value of the `depot` fields MUST correspond to a matching `elasticroute.Depot` in the same plan with the same name!
 
 ### Setting load constraints
+
 Each vehicle can be set to have a cumulative maximum weight, volume and (non-cumulative) seating capacity which can be used to determine how many stops it can serve before it has to return to the depot. Conversely, each stop can also be assigned weight, volume and seating loads.
 The keys are `weight_load`, `volume_load`, `seating_load` for Stops and `weight_capacity`, `volume_capacity` and `seating_capacity` for Vehicles.
 
 ### Alternative connection types (for large datasets)
-By default, all requests are made in a *synchronous* manner. Most small to medium-sized datasets can be solved in less than 10 seconds, but for production uses you probably may one to close the HTTP connection first and poll for updates in the following manner:
+
+By default, all requests are made in a _synchronous_ manner. Most small to medium-sized datasets can be solved in less than 10 seconds, but for production uses you probably may one to close the HTTP connection first and poll for updates in the following manner:
+
 ```python
 import time
 
@@ -179,6 +184,7 @@ while solution.status != "planned":
     time.sleep(2)
     # or do some threading or promise
 ```
+
 Setting the `connection_type` to `"poll"` will cause the server to return you a response immediately after parsing the request data. You can monitor the status with the `status` and `progress` properties while fetching updates with the `refresh()` method.
 
 In addition, setting the `connectionType` to `"webhook"` will also cause the server to post a copy of the response to your said webhook. The exact location of the webhook can be specified with the `webhook` property of `Plan` objects.
