@@ -79,7 +79,7 @@ class Plan():
         solution = Solution()
         solution.api_key = self.api_key
         solution.raw_response_string = response.text
-        solution.raw_response_object = response_obj
+        solution.raw_response_data = response_obj
         solved_stops = []
         for received_stop in response_obj["data"]["details"]["stops"]:
             solved_stop = Stop(received_stop)
@@ -139,6 +139,7 @@ class Solution():
         response_obj = response.json()
 
         self.progress = response_obj["data"]["progress"]
+        self.status = response_obj["data"]["stage"]
         self.data = response_obj["data"]["stage"]
         self.raw_response_string = response.text
         self.raw_response_data = response_obj
@@ -160,6 +161,6 @@ class Solution():
         self.plan_id = response_obj["data"]["plan_id"]
 
     def get_unsolved_stops(self):
-        return [stop for stop in self.stops if isinstance(stop.exception, str) and stop.exception != ""]
+        return [stop for stop in self.stops if isinstance(stop["exception"], str) and stop["exception"] != ""]
 
     unsolved_stops = property(get_unsolved_stops)
