@@ -1,8 +1,6 @@
 from .exceptions import BadFieldError
 from .data_models import Depot, Stop, Vehicle
-from .defaults import *
+from . import defaults
 from .client_models import Plan, Solution
-
-import json
 
 name = "elasticroute"
