@@ -13,7 +13,7 @@ You have a fleet of just 10 vehicles to serve 500 spots in the city. Some vehicl
 
 You don't need to. Just throw us a list of stops, vehicles and depots and we will do the heavy lifting for you. _Routing as a Service!_
 
-**BETA RELASE:**  ElasticRoute is completely free-to-use until 30th April 2020!
+**BETA RELASE:**  ElasticRoute is completely free-to-use until 30th April 2020! Register for an account [here](https://www.elasticroute.com/)
 
 ## Quick Start Guide
 
@@ -21,7 +21,7 @@ Install with pip:
 
     pip install elasticroute
 
-In your code, set your default API Key (this can be retrieved from the dashboard of the web application):
+In your code, set your default API Key (this can be retrieved from the dashboard of the [web application](https://app.elasticroute.com)):
 
 ```python
 import elasticroute as er
