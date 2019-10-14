@@ -42,9 +42,9 @@ class Plan():
             if isinstance(stop["lng"], str):
                 self.stops[i]["lng"] = float(stop["lng"])
             if stop["from"] is None or len(str(stop["from"]).strip()) == 0:
-                self.stops[i]["from"] = self.generalSettings["avail_from"]
+                self.stops[i]["from"] = self.generalSettings["from"]
             if stop["till"] is None or len(str(stop["till"]).strip()) == 0:
-                self.stops[i]["till"] = self.generalSettings["avail_till"]
+                self.stops[i]["till"] = self.generalSettings["till"]
             if stop["depot"] is None or len(str(stop["depot"]).strip()) == 0:
                 self.stops[i]["depot"] = self.depots[0]["name"]
         for i in range(len(self.vehicles)):
@@ -53,9 +53,9 @@ class Plan():
                 self.vehicles[i] = Vehicle(vehicle)
             vehicle = self.vehicles[i]
             if vehicle["avail_from"] is None or len(str(vehicle["avail_from"])) == 0:
-                self.vehicles[i]["avail_from"] = self.generalSettings["avail_from"]
+                self.vehicles[i]["avail_from"] = self.generalSettings["from"]
             if vehicle["avail_till"] is None or len(str(vehicle["avail_till"])) == 0:
-                self.vehicles[i]["avail_till"] = self.generalSettings["avail_till"]
+                self.vehicles[i]["avail_till"] = self.generalSettings["till"]
             if vehicle["depot"] is None or len(str(vehicle["depot"]).strip()) == 0:
                 self.vehicles[i]["depot"] = self.depots[0]["name"]
 

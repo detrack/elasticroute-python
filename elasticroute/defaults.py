@@ -11,7 +11,7 @@ generalSettings = {
     'max_distance': None,
     'max_stops': 30,
     'max_runs': 1,
-    'avail_from': 900,
-    'avail_till': 1700,
+    'from': 900,
+    'till': 1700,
     'webhook_url': None,
 }
