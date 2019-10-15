@@ -3,7 +3,7 @@ import unittest
 import warnings
 import pytest
 from elasticroute.common import Bean
-from elasticroute.warnings.bean import NonStringKeyUsed
+from elasticroute.warnings.bean import NonStringKeyUsed, ResultKeyModified
 
 
 class BeanTestConstructor(unittest.TestCase):
@@ -163,6 +163,52 @@ class BeanTestDataAccess(unittest.TestCase):
         b = Bean()
         b["hello"] = "world"
         del b["hello"]
+
+    # tests that in a subclass where result_data_keys are defined, warning is rasied when modification using these keys are attempted via setitem
+    def test_set_result_key_raises_warning(self):
+        class BeanBag(Bean):
+            result_data_keys = {"created_at", "updated_at"}
+
+        data = {
+            "hello": "world",
+            "created_at": "today"
+        }
+        with pytest.warns(ResultKeyModified):
+            b = BeanBag(data)
+
+    # tests that we can still set readonly result keys via set_readonly_data
+    def test_set_readonly_data(self):
+        class BeanBag(Bean):
+            result_data_keys = {"created_at", "updated_at"}
+
+        data = {
+            "hello": "world"
+        }
+        b = BeanBag(data)
+        b.set_readonly_data("created_at", "today")
+        self.assertEqual("today", b.data["created_at"])
+
+    # tests that setting readonly data with non-string keys will also trigger warning
+    def test_set_readonly_data_with_non_string_keys_issues_warning(self):
+        class BeanBag(Bean):
+            result_data_keys = {"123", "updated_at"}
+
+        b = BeanBag()
+        with pytest.warns(NonStringKeyUsed):
+            b.set_readonly_data(123, "456")
+        self.assertEqual("456", b.data["123"])
+
+    # tests we can still get readonly result keys with just getitem
+    def test_get_readonly_data(self):
+        class BeanBag(Bean):
+            result_data_keys = {"created_at", "updated_at"}
+
+        data = {
+            "hello": "world"
+        }
+        b = BeanBag(data)
+        b.set_readonly_data("created_at", "today")
+        self.assertEqual("today", b["created_at"])
 
 
 class BeanTestDataSerialization(unittest.TestCase):

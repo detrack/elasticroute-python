@@ -6,4 +6,10 @@ class NonStringKeyUsed(UserWarning):
 
     def __str__(self):
         return self.message
-    pass
+
+
+class ResultKeyModified(UserWarning):
+    message = "WARNING: You tried to modify a readonly data attribute using bean[readonly_index] = value. Doing so has no effect. If you really need to change the readonly attributes, please use the set_readonly_data method."
+
+    def __str__(self):
+        return self.message
