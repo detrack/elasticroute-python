@@ -85,3 +85,28 @@ class Vehicle(Bean):
     def __init__(self, data={}):
         # the super constructor is called AFTER the defaults are set to allow overriding by the end user
         super().__init__(data)
+
+
+class Stop(Bean):
+    default_data = {
+        'priority': None,
+        'postal_code': None,
+        'preassign_to': None,
+        'weight_load': None,
+        'address': None,
+        'volume_load': None,
+        'depot': None,
+        'lat': None,
+        'lng': None,
+        'seating_load': None,
+        'name': None,
+        'service_time': None,
+        'vehicle_type': None,
+    }
+    result_data_keys = {
+        'assign_to',
+        'run',
+        'eta',
+        'sequence',
+        'exception'
+    }
