@@ -82,10 +82,6 @@ class Vehicle(Bean):
         'name': None,
     }
 
-    def __init__(self, data={}):
-        # the super constructor is called AFTER the defaults are set to allow overriding by the end user
-        super().__init__(data)
-
 
 class Stop(Bean):
     default_data = {
