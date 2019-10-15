@@ -64,3 +64,24 @@ class Bean():
     def __repr__(self):
         return "{}({})".format(self.__class__, str(self.data))
 
+
+class Vehicle(Bean):
+    default_data = {
+        'priority': None,
+        'vehicle_types': None,
+        'end_depot': None,
+        'seating_capacity': None,
+        'avail_from': 900,
+        'avail_to': 1700,
+        'volume_capacity': None,
+        'service_radius': None,
+        'buffer': None,
+        'depot': None,
+        'weight_capacity': None,
+        'return_to_depot': None,
+        'name': None,
+    }
+
+    def __init__(self, data={}):
+        # the super constructor is called AFTER the defaults are set to allow overriding by the end user
+        super().__init__(data)
