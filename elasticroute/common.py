@@ -4,6 +4,7 @@ from .warnings.bean import NonStringKeyUsed, ResultKeyModified
 
 class Bean():
     default_data = {}
+    required_data_keys = set()
     result_data_keys = set()
 
     def __init__(self, data={}):
@@ -17,10 +18,11 @@ class Bean():
         for c in self.__class__.mro()[::-1][1:]:
             self.data = {**self.data, **c.default_data}
             self.result_data_keys = {*self.result_data_keys, *c.result_data_keys}
+            self.required_data_keys = {*self.required_data_keys, *c.required_data_keys}
         # repair modified data keys
         if not hasattr(self, 'modified_data_keys') or type(self.modified_data_keys) is not set:
             self.modified_data_keys = set()
-        self.modified_data_keys = set(self.default_data.keys())
+        self.modified_data_keys = set(data.keys())
         # finally, merge data items
         for key, value in data.items():
             self[key] = value
@@ -89,6 +91,9 @@ class Vehicle(Bean):
         'return_to_depot': None,
         'name': None,
     }
+    required_data_keys = {
+        'name'
+    }
 
 
 class Stop(Bean):
@@ -106,6 +111,12 @@ class Stop(Bean):
         'name': None,
         'service_time': None,
         'vehicle_type': None,
+    }
+    required_data_keys = {
+        'name',
+        'address',
+        'lat',
+        'lng'
     }
     result_data_keys = {
         'assign_to',
