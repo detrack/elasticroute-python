@@ -106,3 +106,13 @@ class Stop(Bean):
         'sequence',
         'exception'
     }
+
+
+class Depot(Bean):
+    default_data = {
+        "name",
+        "lat",
+        "lng",
+        "address",
+        "postal_code"
+    }

@@ -1,5 +1,6 @@
 from .common import Vehicle as BaseVehicle
-from .common import Stop as Stop
+from .common import Stop as BaseStop
+from .common import Depot as BaseDepot
 
 
 class Vehicle(BaseVehicle):
@@ -20,3 +21,8 @@ class Stop(BaseStop):
     # add routing-engine only readonly fields
     # none atm
     result_data_keys = {}
+
+
+class Depot(BaseDepot):
+    # no difference from base depot for now
+    pass
