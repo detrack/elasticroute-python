@@ -35,6 +35,11 @@ class Bean():
             warnings.warn(NonStringKeyUsed.message, NonStringKeyUsed, stacklevel=2)
         return self.data[str(key)]
 
+    def get(self, key):
+        if type(key) is not str:
+            warnings.warn(NonStringKeyUsed.message, NonStringKeyUsed, stacklevel=2)
+        return self.data.get(str(key), None)
+
     def __setitem__(self, key, value):
         if type(key) is not str:
             warnings.warn(NonStringKeyUsed.message, NonStringKeyUsed, stacklevel=2)
