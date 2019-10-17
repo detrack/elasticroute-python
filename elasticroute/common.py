@@ -64,6 +64,14 @@ class Bean():
     def __repr__(self):
         return "{}({})".format(self.__class__, str(self.data))
 
+    @classmethod
+    def get_full_default_data(cls):
+        d = dict()
+        for c in cls.mro()[::-1][1:]:
+            if hasattr(c, "default_data"):
+                d = {**d, **c.default_data}
+        return d
+
 
 class Vehicle(Bean):
     default_data = {

@@ -256,3 +256,32 @@ class BeanTestDataSerialization(unittest.TestCase):
         self.assertIs(BeanBag, type(result))
         self.assertEqual(b.data, result.data)
         self.assertEqual("bar", result.foo)
+
+
+class BeanTestMisc(unittest.TestCase):
+    # test misc functions of the bean
+
+    # test whether sub-subclasses can view the entire default hierachy
+    def testCanSeeFullDefaultData(self):
+        class BeanBag(Bean):
+            default_data = {
+                "hello": "world",
+                "apa": "ini"
+            }
+
+        class BeanBagBag(BeanBag):
+            default_data = {
+                "hello": "sekai"
+            }
+        b = BeanBagBag()
+        expected = {
+            "hello": "sekai",
+            "apa": "ini"
+        }
+        expected2 = {
+            "hello": "world",
+            "apa": "ini"
+        }
+        self.assertEqual(expected, b.get_full_default_data())
+        self.assertEqual(expected, BeanBagBag.get_full_default_data())
+        self.assertEqual(expected2, BeanBag.get_full_default_data())
