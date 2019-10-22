@@ -27,7 +27,6 @@ class BeanSerializer():
                 r = k in obj.required_data_keys
                 m = not self.modified_keys_only or k in obj.modified_data_keys
                 v = not self.vanilla_keys_only or k in obj.get_full_default_data().keys()
-                print(k, r, m, v)
                 return r or (m and v)
 
             return {k: v for (k, v) in d.items() if should_include_entry(k, v, obj)}
@@ -35,7 +34,7 @@ class BeanSerializer():
             return d
 
 
-class StopSerializer(Serializer):
+class StopSerializer(BeanSerializer):
     def to_dict(self, obj):
         if isinstance(obj, BaseStop):
             # the superclass is capable of processing this
