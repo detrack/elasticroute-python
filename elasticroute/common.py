@@ -79,6 +79,14 @@ class Bean():
                 d = {**d, **c.default_data}
         return d
 
+    @classmethod
+    def get_full_result_data_keys(cls):
+        d = dict()
+        for c in cls.mro()[::-1][1:]:
+            if hasattr(c, "result_data_keys"):
+                d = {*d, *c.result_data_keys}
+        return d
+
 
 class Vehicle(Bean):
     default_data = {
