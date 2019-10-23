@@ -66,3 +66,11 @@ class Plan():
             "rushHours": self.rushHours,
             "generalSettings": self.generalSettings
         }
+
+    def __getitem__(self, k):
+        if k in ("date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
+            return getattr(self, k)
+
+    def __setitem__(self, k, v):
+        if k in ("date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
+            return setattr(self, k, v)
