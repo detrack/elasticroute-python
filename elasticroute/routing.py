@@ -49,7 +49,8 @@ class Plan():
         "webhook_url": None
     }
 
-    def __init__(self, date=None, stops=None, depots=None, vehicles=None, rushHours=None, generalSettings=None):
+    def __init__(self, plan_id, date=None, stops=None, depots=None, vehicles=None, rushHours=None, generalSettings=None):
+        self.plan_id = plan_id
         self.date = date if date is not None else datetime.now().strftime("%Y-%m-%d")
         self.stops = stops if stops is not None else []
         self.depots = depots if depots is not None else []
@@ -59,6 +60,7 @@ class Plan():
 
     def __dict__(self):
         return {
+            "plan_id": self.plan_id,
             "date": self.date,
             "stops": self.stops,
             "depots": self.depots,
@@ -68,9 +70,9 @@ class Plan():
         }
 
     def __getitem__(self, k):
-        if k in ("date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
+        if k in ("plan_id", "date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
             return getattr(self, k)
 
     def __setitem__(self, k, v):
-        if k in ("date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
+        if k in ("plan_id", "date", "stops", "depots", "vehicles", "rushHours", "generalSettings"):
             return setattr(self, k, v)
