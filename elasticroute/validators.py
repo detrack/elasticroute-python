@@ -1,4 +1,6 @@
 from datetime import datetime
+from inspect import signature
+
 from .exceptions.validator import BadFieldError
 
 
@@ -103,3 +105,26 @@ class DepotValidator(Validator):
         "either address or lat/lng is present": lambda o: not_null_or_ws_str(o["address"]) or (floaty_number_or_string(o["lat"]) and floaty_number_or_string(o["lng"])),
     }
 
+
+class PlanValidator(Validator):
+    stop_validator = StopValidator
+    depot_validator = DepotValidator
+    vehicle_validator = VehicleValidator
+
+    single_object_rules = {
+        "date is valid date": lambda o: is_valid_date(o["date"]),
+        "stops is a list of valid stop representations": lambda o, c: type(o["stops"]) is list and all([c.stop_validator.validate_object(s) for s in o["stops"]]),
+        "vehicles is a list of valid vehicle representations": lambda o, c: type(o["vehicles"]) is list and all([c.vehicle_validator.validate_object(s) for s in o["vehicles"]]),
+        "depots is a list of valid depot representations": lambda o, c: type(o["depots"]) is list and all([c.depot_validator.validate_object(s) for s in o["depots"]]),
+    }
+
+    @classmethod
+    def validate_object(cls, obj):
+        for rulename, rulefunction in cls.single_object_rules.items():
+            if len(signature(rulefunction).parameters) == 1:
+                if not rulefunction(obj):
+                    raise BadFieldError("Validation Failed for Validator {}, rule: {}".format(cls, rulename))
+            elif len(signature(rulefunction).parameters) == 2:
+                if not rulefunction(obj, cls):
+                    raise BadFieldError("Validation Failed for Validator {}, rule: {}".format(cls, rulename))
+        return True
