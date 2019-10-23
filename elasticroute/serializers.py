@@ -1,7 +1,7 @@
 from .common import Bean
-from .common import Stop as BaseStop
-from .dashboard import Stop as DashboardStop
-from .routing import Stop as RoutingStop
+from .common import Stop as BaseStop, Vehicle as BaseVehicle
+from .dashboard import Stop as DashboardStop, Vehicle as DashboardVehicle
+from .routing import Stop as RoutingStop, Vehicle as RoutingVehicle
 
 
 class Serializer():
@@ -77,3 +77,48 @@ class RoutingStopSerializer(StopSerializer):
             return d
         else:
             raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardStop, type(obj)))
+
+
+class VehicleSerializer(BeanSerializer):
+    def to_dict(self, obj):
+        if isinstance(obj, BaseVehicle):
+            # the superclass is capable of processing this
+            return super().to_dict(obj)
+        elif type(obj) is dict:
+            d = obj
+            # decide whether to remove non vanilla keys
+            if self.vanilla_keys_only:
+                d = {k: v for (k, v) in d.items() if k in BaseVehicle.get_full_default_data().keys()}
+            return d
+        else:
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardVehicle, type(obj)))
+
+
+class DashboardVehicleSerializer(VehicleSerializer):
+    def to_dict(self, obj):
+        if type(obj) is DashboardVehicle:
+            # the superclass is capable of processing this
+            return super().to_dict(obj)
+        elif type(obj) is dict:
+            d = obj
+            # decide whether to remove non vanilla keys
+            if self.vanilla_keys_only:
+                d = {k: v for (k, v) in d.items() if k in DashboardVehicle.get_full_default_data().keys()}
+            return d
+        else:
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardVehicle, type(obj)))
+
+
+class RoutingVehicleSerializer(VehicleSerializer):
+    def to_dict(self, obj):
+        if type(obj) is RoutingVehicle:
+            # the superclass is capable of processing this
+            return super().to_dict(obj)
+        elif type(obj) is dict:
+            d = obj
+            # decide whether to remove non vanilla keys
+            if self.vanilla_keys_only:
+                d = {k: v for (k, v) in d.items() if k in RoutingVehicle.get_full_default_data().keys()}
+            return d
+        else:
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardVehicle, type(obj)))
