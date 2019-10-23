@@ -36,3 +36,14 @@ class Stop(BaseStop):
         'created_at',
         'updated_at'
     }
+
+    def __init__(self, data={}):
+        super().__init__(data)
+        self.__old_name = None
+
+    def __setitem__(self, k, v):
+        if k == "name" and self["name"] != v:
+            self.__old_name = str(self["name"])
+        super().__setitem__(k, v)
+
+    old_name = property(lambda self: self.__old_name)
