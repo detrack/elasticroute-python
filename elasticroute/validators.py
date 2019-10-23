@@ -82,5 +82,5 @@ class VehicleValidator(Validator):
         "if present, buffer must be a valid whole number representation": lambda o: inty_number_or_string(o["buffer"]) if o.get("buffer") is not None else True,
         "if present, return_to_depot must be a boolean": lambda o: type(o["return_to_depot"]) is bool if o.get("return_to_depot") is not None else True,
         "if present, avail_from must be a valid whole number representation from 0 to 2359": lambda o: (inty_number_or_string(o["avail_from"]) and int(o["avail_from"]) >= 0 and int(o["avail_from"]) <= 2359) if o.get("avail_from") is not None else True,
-        "if present, avail_to must be a valid whole number representation from 0 to 2359": lambda o: (inty_number_or_string(o["avail_to"]) and int(o["avail_to"]) >= 0 and int(o["avail_to"]) <= 2359) if o.get("avail_to") is not None else True,
+        "if present, avail_till must be a valid whole number representation from 0 to 2359": lambda o: (inty_number_or_string(o["avail_till"]) and int(o["avail_till"]) >= 0 and int(o["avail_till"]) <= 2359) if o.get("avail_till") is not None else True,
     }
