@@ -1,3 +1,4 @@
+from datetime import datetime
 from .exceptions.validator import BadFieldError
 
 
@@ -35,6 +36,15 @@ def inty_number_or_string(input):
         except (ValueError, TypeError):
             return False
         return True
+
+
+def is_valid_date(date_text):
+    try:
+        if date_text != datetime.strptime(date_text, "%Y-%m-%d").strftime('%Y-%m-%d'):
+            raise ValueError
+        return True
+    except ValueError:
+        return False
 
 
 class Validator():
