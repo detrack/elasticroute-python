@@ -3,6 +3,8 @@ from .common import Stop as BaseStop, Vehicle as BaseVehicle, Depot as BaseDepot
 from .dashboard import Stop as DashboardStop, Vehicle as DashboardVehicle
 from .routing import Stop as RoutingStop, Vehicle as RoutingVehicle, Depot as RoutingDepot
 
+from .routing import Plan
+
 
 class Deserializer():
     def from_dict(self, d):
@@ -52,3 +54,19 @@ class DepotDeserializer(BeanDeserializer):
 
 class RoutingDepotDeserializer(DepotDeserializer):
     target_class = RoutingDepot
+
+
+class PlanDeserializer(Deserializer):
+    def __init__(self, *, stop_deserializer=None, vehicle_deserializer=None, depot_deserializer=None):
+        self.stop_deserializer = stop_deserializer
+        self.vehicle_deserializer = vehicle_deserializer
+        self.depot_deserializer = depot_deserializer
+
+    def from_dict(self, d):
+        p = Plan()
+        for k, v in d.items():
+            setattr(p, k, v)
+        p.stops = [self.stop_deserializer.from_dict(s) for s in d["stops"]]
+        p.vehicles = [self.vehicle_deserializer.from_dict(v) for v in d["vehicles"]]
+        p.depots = [self.depot_deserializer.from_dict(de) for de in d["depots"]]
+        return p
