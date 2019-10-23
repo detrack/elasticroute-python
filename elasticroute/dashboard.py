@@ -6,7 +6,25 @@ class Vehicle(BaseVehicle):
     # add dashboard only fields
     # none atm
     default_data = {
+        'avail': None,
+        'avail_fri': None,
+        'avail_mon': None,
+        'avail_wed': None,
+        'avail_tue': None,
+        'avail_thu': None,
+        'groups': None,
+        'break_time_window': None,
+        'avail_sat': None,
+        'zones': None,
+        'unzoned': None,
+        'all_groups': None,
+        'avail_sun': None,
+    }
 
+    # add dashboard readonly fields
+    result_data_keys = {
+        'created_at',
+        'updated_at'
     }
 
 

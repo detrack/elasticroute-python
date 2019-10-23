@@ -95,7 +95,7 @@ class Vehicle(Bean):
         'end_depot': None,
         'seating_capacity': None,
         'avail_from': 900,
-        'avail_to': 1700,
+        'avail_till': 1700,
         'volume_capacity': None,
         'service_radius': None,
         'buffer': None,
