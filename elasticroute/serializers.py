@@ -46,7 +46,7 @@ class StopSerializer(BeanSerializer):
                 d = {k: v for (k, v) in d.items() if k in BaseStop.get_full_default_data().keys()}
             return d
         else:
-            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardStop, type(obj)))
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(BaseStop, type(obj)))
 
 
 class DashboardStopSerializer(StopSerializer):
@@ -76,7 +76,7 @@ class RoutingStopSerializer(StopSerializer):
                 d = {k: v for (k, v) in d.items() if k in RoutingStop.get_full_default_data().keys()}
             return d
         else:
-            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardStop, type(obj)))
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(RoutingStop, type(obj)))
 
 
 class VehicleSerializer(BeanSerializer):
@@ -91,7 +91,7 @@ class VehicleSerializer(BeanSerializer):
                 d = {k: v for (k, v) in d.items() if k in BaseVehicle.get_full_default_data().keys()}
             return d
         else:
-            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardVehicle, type(obj)))
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(BaseVehicle, type(obj)))
 
 
 class DashboardVehicleSerializer(VehicleSerializer):
@@ -121,4 +121,4 @@ class RoutingVehicleSerializer(VehicleSerializer):
                 d = {k: v for (k, v) in d.items() if k in RoutingVehicle.get_full_default_data().keys()}
             return d
         else:
-            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(DashboardVehicle, type(obj)))
+            raise TypeError("Invalid data type passed to to_dict: expected {} or dict, received {}".format(RoutingVehicle, type(obj)))
