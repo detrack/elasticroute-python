@@ -1,7 +1,7 @@
-from .repositories import StopRepository
+from .repositories import StopRepository, VehicleRepository
 from .serializers import DashboardStopSerializer
 from .deserializers import DashboardStopDeserializer
-from .validators import StopValidator
+from .validators import StopValidator, VehicleValidator
 
 
 class DashboardClient():

@@ -204,3 +204,32 @@ class StopRepository(Repository):
                 raise ValueError("Invalid Date Format!")
 
         return super().delete(name, date)
+
+
+class VehicleRepository(Repository):
+    path = "vehicles"
+
+    def resolve_create_path(self, obj):
+        return "{}/{}".format(self.client.endpoint, self.path)
+
+    def resolve_retrieve_path(self, name):
+        return "{}/{}/{}".format(self.client.endpoint, self.path, name)
+
+    def resolve_update_path(self, obj, old_name=None):
+        pref_name = old_name if old_name is not None else obj.old_name if obj.old_name is not None and obj.old_name != "" else obj["name"]
+        return "{}/{}/{}".format(self.client.endpoint, self.path, pref_name)
+
+    def resolve_delete_path(self, obj):
+        return "{}/{}/{}".format(self.client.endpoint, self.path, obj["name"])
+
+    def create(self, obj):
+        return super().create(obj)
+
+    def retrieve(self, name):
+        return super().retrieve(name)
+
+    def update(self, obj, *, old_name=None):
+        return super().update(obj, old_name=old_name)
+
+    def delete(self, name):
+        return super().delete(name)
