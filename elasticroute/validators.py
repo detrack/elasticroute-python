@@ -16,8 +16,8 @@ def floaty_number_or_string(input):
         if not not_null_or_ws_str(input):
             return False
         try:
-            f = float(str)
-        except ValueError, TypeError:
+            float(str)
+        except (ValueError, TypeError):
             return False
         return True
     else:
@@ -31,8 +31,8 @@ def inty_number_or_string(input):
         if not not_null_or_ws_str(input):
             return False
         try:
-            f = float(str)
-        except ValueError, TypeError:
+            float(str)
+        except (ValueError, TypeError):
             return False
         return True
 
@@ -70,7 +70,7 @@ class StopValidator(Validator):
 class VehicleValidator(Validator):
 
     single_object_rules = {
-        "name is not null or empty string": lambda o: not_null_or_ws_str(o["name"])",
+        "name is not null or empty string": lambda o: not_null_or_ws_str(o["name"]),
         "if present, priority must be a valid whole number representation": lambda o: inty_number_or_string(o["priority"]) if o.get("priority") is not None else True,
         "if present, depot must be a valid string": lambda o: not_null_or_ws_str(o["depot"]) if o.get("depot") is not None else True,
         "if present, end_depot must be a valid string": lambda o: not_null_or_ws_str(o["end_depot"]) if o.get("end_depot") is not None else True,
@@ -81,6 +81,6 @@ class VehicleValidator(Validator):
         "if present, service_radius must be a valid whole number representation": lambda o: inty_number_or_string(o["service_radius"]) if o.get("service_radius") is not None else True,
         "if present, buffer must be a valid whole number representation": lambda o: inty_number_or_string(o["buffer"]) if o.get("buffer") is not None else True,
         "if present, return_to_depot must be a boolean": lambda o: type(o["return_to_depot"]) is bool if o.get("return_to_depot") is not None else True,
-        "if present, avail_from must be a valid whole number representation from 0 to 2359": lambda o: (is_inty_number_or_string(o["avail_from"]) and int(o["avail_from"]) >= 0 and int(o["avail_from"]) <= 2359) if o.get("avail_from") is not None else True,
-        "if present, avail_to must be a valid whole number representation from 0 to 2359": lambda o: (is_inty_number_or_string(o["avail_to"]) and int(o["avail_to"]) >= 0 and int(o["avail_to"]) <= 2359) if o.get("avail_to") is not None else True,
+        "if present, avail_from must be a valid whole number representation from 0 to 2359": lambda o: (inty_number_or_string(o["avail_from"]) and int(o["avail_from"]) >= 0 and int(o["avail_from"]) <= 2359) if o.get("avail_from") is not None else True,
+        "if present, avail_to must be a valid whole number representation from 0 to 2359": lambda o: (inty_number_or_string(o["avail_to"]) and int(o["avail_to"]) >= 0 and int(o["avail_to"]) <= 2359) if o.get("avail_to") is not None else True,
     }
