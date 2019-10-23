@@ -205,6 +205,38 @@ class StopRepository(Repository):
 
         return super().delete(obj, date)
 
+    def start_planning(self, date=None):
+        if date is None:
+            date = datetime.now().strftime("%Y-%m-%d")
+        else:
+            if not validate_date(date):
+                raise ValueError("Invalid Date Format!")
+
+        url = "{}/{}/{}/plan".format(self.client.endpoint, self.path, date)
+        response = requests.post(url, json={}, headers=self.resolve_default_headers(None))
+
+        if str(response.status_code)[0] != "2":
+            message = response.json().get("message")
+            raise ERServiceException(message, response.status_code, code=response.status_code)
+
+        return True
+
+    def stop_planning(self, date=None):
+        if date is None:
+            date = datetime.now().strftime("%Y-%m-%d")
+        else:
+            if not validate_date(date):
+                raise ValueError("Invalid Date Format!")
+
+        url = "{}/{}/{}/plan/stop".format(self.client.endpoint, self.path, date)
+        response = requests.post(url, json={}, headers=self.resolve_default_headers(None))
+
+        if str(response.status_code)[0] != "2":
+            message = response.json().get("message")
+            raise ERServiceException(message, response.status_code, code=response.status_code)
+
+        return True
+
 
 class VehicleRepository(Repository):
     path = "vehicles"
