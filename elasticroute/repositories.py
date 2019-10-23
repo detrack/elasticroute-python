@@ -128,15 +128,15 @@ class Repository():
 
         return self.deserializer.from_dict(response_json["data"])
 
-    def delete(self, name, **kwargs):
+    def delete(self, obj, **kwargs):
         if self.client.api_key is None or self.client.api_key.strip() == "":
             raise ValueError("API Key is not set")
 
-        response = requests.put(self.resolve_delete_path(name, **kwargs),
-                                json=self.resolve_delete_body(name, **kwargs),
-                                headers=self.resolve_delete_headers(name, **kwargs),
-                                **self.request_args
-                                )
+        response = requests.delete(self.resolve_delete_path(obj, **kwargs),
+                                   json=self.resolve_delete_body(obj, **kwargs),
+                                   headers=self.resolve_delete_headers(obj, **kwargs),
+                                   **self.request_args
+                                   )
         if str(response.status_code)[0] != "2":
             message = response.json().get("message")
             raise ERServiceException(message, response.status_code, code=response.status_code)
@@ -196,14 +196,14 @@ class StopRepository(Repository):
 
         return super().update(obj, date=date, old_name=old_name)
 
-    def delete(self, name, *, date=None):
+    def delete(self, obj, *, date=None):
         if date is None:
             date = datetime.now().strftime("%Y-%m-%d")
         else:
             if not validate_date(date):
                 raise ValueError("Invalid Date Format!")
 
-        return super().delete(name, date)
+        return super().delete(obj, date)
 
 
 class VehicleRepository(Repository):
@@ -231,8 +231,8 @@ class VehicleRepository(Repository):
     def update(self, obj, *, old_name=None):
         return super().update(obj, old_name=old_name)
 
-    def delete(self, name):
-        return super().delete(name)
+    def delete(self, obj):
+        return super().delete(obj)
 
 
 class PlanRepository(Repository):
