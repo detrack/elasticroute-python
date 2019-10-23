@@ -17,9 +17,10 @@ class Repository():
     path = ""
     client = None
 
-    def __init__(self, serializer=None, client=None, deserializer=None):
+    def __init__(self, serializer=None, client=None, deserializer=None, validator=None):
         self.serializer = serializer
         self.deserializer = deserializer
+        self.validator = validator
         self.client = client
         self.request_args = {}
         pass
@@ -73,6 +74,7 @@ class Repository():
         return {}
 
     def create(self, obj, **kwargs):
+        self.validator.validate_object(obj)
         if self.client.api_key is None or self.client.api_key.strip() == "":
             raise ValueError("API Key is not set")
 
@@ -109,6 +111,7 @@ class Repository():
         return self.deserializer.from_dict(response_json["data"])
 
     def update(self, obj, **kwargs):
+        self.validator.validate_object(obj)
         if self.client.api_key is None or self.client.api_key.strip() == "":
             raise ValueError("API Key is not set")
         print(self.resolve_update_body(obj, **kwargs))
@@ -125,13 +128,13 @@ class Repository():
 
         return self.deserializer.from_dict(response_json["data"])
 
-    def delete(self, obj, **kwargs):
+    def delete(self, name, **kwargs):
         if self.client.api_key is None or self.client.api_key.strip() == "":
             raise ValueError("API Key is not set")
 
-        response = requests.put(self.resolve_delete_path(obj, **kwargs),
-                                json=self.resolve_delete_body(obj, **kwargs),
-                                headers=self.resolve_delete_headers(obj, **kwargs),
+        response = requests.put(self.resolve_delete_path(name, **kwargs),
+                                json=self.resolve_delete_body(name, **kwargs),
+                                headers=self.resolve_delete_headers(name, **kwargs),
                                 **self.request_args
                                 )
         if str(response.status_code)[0] != "2":

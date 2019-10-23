@@ -1,6 +1,7 @@
 from .repositories import StopRepository
 from .serializers import DashboardStopSerializer
 from .deserializers import DashboardStopDeserializer
+from .validators import StopValidator
 
 
 class DashboardClient():
@@ -9,4 +10,4 @@ class DashboardClient():
 
     def __init__(self, api_key):
         self.api_key = api_key
-        self.stops = StopRepository(serializer=DashboardStopSerializer(), client=self, deserializer=DashboardStopDeserializer())
+        self.stops = StopRepository(serializer=DashboardStopSerializer(), client=self, deserializer=DashboardStopDeserializer(), validator=StopValidator())
