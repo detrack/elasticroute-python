@@ -1,7 +1,7 @@
 from .common import Bean
-from .common import Stop as BaseStop
-from .dashboard import Stop as DashboardStop
-from .routing import Stop as RoutingStop
+from .common import Stop as BaseStop, Vehicle as BaseVehicle
+from .dashboard import Stop as DashboardStop, Vehicle as DashboardVehicle
+from .routing import Stop as RoutingStop, Vehicle as RoutingVehicle
 
 
 class Deserializer():
@@ -32,3 +32,15 @@ class DashboardStopDeserializer(StopDeserializer):
 
 class RoutingStopDeserializer(StopDeserializer):
     target_class = RoutingStop
+
+
+class VehicleDeserializer(BeanDeserializer):
+    target_class = BaseVehicle
+
+
+class DashboardVehicleDeserializer(VehicleDeserializer):
+    target_class = DashboardVehicle
+
+
+class RoutingVehicleDeserializer(VehicleDeserializer):
+    target_class = RoutingVehicle
