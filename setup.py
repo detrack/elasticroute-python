@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="elasticroute",
-    version="1.0.2",
+    version="2.0.0",
     author="Detrack",
     author_email="chester@detack.com",
     description="Free, intelligent routing for your logistics – now on Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/detrack/elasticroute-python",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=("tests")),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
