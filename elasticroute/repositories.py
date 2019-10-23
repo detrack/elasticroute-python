@@ -233,3 +233,46 @@ class VehicleRepository(Repository):
 
     def delete(self, name):
         return super().delete(name)
+
+
+class PlanRepository(Repository):
+    path = ""
+
+    def resolve_create_path(self, obj):
+        return "{}/{}".format(self.client.endpoint, obj["plan_id"])
+
+    def resolve_retrieve_path(self, plan_id):
+        return "{}/{}".format(self.client.endpoint, plan_id)
+
+    def resolve_update_path(self, obj):
+        return "{}/{}".format(self.client.endpoint)
+
+    def resolve_delete_path(self, obj):
+        return "{}/{}".format(self.client.endpoint, obj["plan_id"])
+
+    def resolve_stop_path(self, obj):
+        return "{}/{}/stop".format(self.client.endpoint, obj["plan_id"])
+
+    def resolve_stop_headers(self, obj):
+        return self.resolve_default_headers()
+
+    def resolve_stop_body(self, obj):
+        return {}
+
+    def stop(self, obj, **kwargs):
+        if self.client.api_key is None or self.client.api_key.strip() == "":
+            raise ValueError("API Key is not set")
+
+        response = requests.post(self.resolve_stop_path(obj, **kwargs),
+                                 json=self.resolve_stop_body(obj, **kwargs),
+                                 headers=self.resolve_stop_headers(obj, **kwargs),
+                                 **self.request_args
+                                 )
+
+        if str(response.status_code)[0] != "2":
+            message = response.json().get("message")
+            raise ERServiceException(message, response.status_code, code=response.status_code)
+
+        response_json = response.json()
+
+        return response_json
