@@ -1,7 +1,7 @@
 from datetime import datetime
 from inspect import signature
 
-from .exceptions.validator import BadFieldError
+from .errors.validator import BadFieldError
 
 
 def not_null_or_ws_str(string):
