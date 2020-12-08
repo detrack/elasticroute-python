@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="elasticroute",
-    version="2.0.1",
+    version="2.0.2",
     author="Detrack",
     author_email="chester@detack.com",
     description="Free, intelligent routing for your logistics – now on Python",
