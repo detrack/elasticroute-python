@@ -1,3 +1,15 @@
+> ## ⚠️ Archived
+>
+> This repository was archived on **2026-08-11** and is now **read-only**.
+>
+> Last commit to the default branch: **2020-12-08** — 5.7 years before archiving. It was archived as part of an organisation-wide review of dormant
+> repositories. No further changes will be made here.
+>
+> The code remains available to clone and fork. An organisation owner can
+> restore write access via *Settings → General → Danger Zone → Unarchive*.
+
+---
+
 [![Build Status](https://travis-ci.com/detrack/elasticroute-python.svg?branch=master)](https://travis-ci.com/detrack/elasticroute-python)
 [![PyPI version](https://badge.fury.io/py/elasticroute.svg)](https://badge.fury.io/py/elasticroute)
 [![Python Versions](https://img.shields.io/pypi/pyversions/elasticroute.svg)](https://pypi.org/project/elasticroute/)
